@@ -1,5 +1,8 @@
+{{-- Extent App --}}
 @extends('layouts.app')
 
+
+{{-- Content section --}}
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -15,6 +18,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <h1>hi there</h1>
                 </div>
             </div>
         </div>
