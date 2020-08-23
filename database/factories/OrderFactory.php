@@ -23,17 +23,3 @@ $factory->define(Order::class, function (Faker $faker) {
 
     ];
 });
-
-
-// // pick up location details
-// $table->string('PickupLocation');
-// $table->time('PickupTime');
-// $table->string('OrderNumber');
-
-// // delivery location details
-// $table->string('DeliveryAdress');
-// $table->integer('DeliveryPostalCode');
-// $table->string('ClientName');
-// $table->string('ClientPhoneNumber');
-// $table->string('Gift')->nullable();
-// $table->time('DeliveryTime')->nullable();
