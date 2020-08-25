@@ -42,8 +42,17 @@ class OrdersController extends Controller
 
         $order = new Order;
         $order->PickupLocation = $request->input('PickupLocation');
-        $order->Deliv = $request->input('PickupLocation');
+        $order->PickUpTime = now();
+        $order->DeliveryAdress = $request->input('DeliveryAdress');
+        $order->DeliveryPostCode = $request->input('DeliveryPostCode');
+        $order->ClientName = $request->input('ClientName');
+        $order->ClientPhoneNumber = $request->input('ClientPhoneNumber');
+        $order->save();
+
+         return redirect('/orders');
+
         // to be continued
+
     }
 
     /**
