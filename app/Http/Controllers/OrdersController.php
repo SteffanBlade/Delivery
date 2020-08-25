@@ -25,7 +25,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -36,7 +36,14 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'PickupLocation'=>'required'
+        ]);
+
+        $order = new Order;
+        $order->PickupLocation = $request->input('PickupLocation');
+        $order->Deliv = $request->input('PickupLocation');
+        // to be continued
     }
 
     /**
