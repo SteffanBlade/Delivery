@@ -20,14 +20,16 @@ class CreateOrdersTable extends Migration
             // pick up location details
             $table->string('PickupLocation');  // add to register
             $table->time('PickupTime');
-            // $table->string('OrderNumber');
+
+
 
             // delivery location details
             $table->string('DeliveryAdress');
-            $table->integer('DeliveryPostCode');  // ?postal or post?
+            $table->integer('DeliveryPostCode');
             $table->string('ClientName');
             $table->string('ClientPhoneNumber');
-            $table->string('Gift')->nullable();  // boolean ...from ?
+            $table->string('Gift')->nullable();
+            $table->string('GiftGiver')->nullable();
             $table->time('DeliveryTime')->nullable();
 
             $table->timestamps();
