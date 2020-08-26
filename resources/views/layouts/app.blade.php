@@ -35,6 +35,9 @@
                     <ul class="navbar-nav mr-auto">
                         <a href="/orders">Orders</a>
                     </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <a href="/orders/create">Create order</a>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
