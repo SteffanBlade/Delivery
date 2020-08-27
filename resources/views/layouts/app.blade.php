@@ -33,11 +33,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a href="/orders">Orders</a>
+                        <a class="ml-3" href="/orders">Orders</a>
+                        <a class="ml-3" href="/myorders">My orders</a>
+                        <a class="ml-3" href="/orders/create">Create order</a>
                     </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <a href="/orders/create">Create order</a>
-                    </ul>
+                   
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

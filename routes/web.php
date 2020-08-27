@@ -20,4 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// routes for the buttons
+Route::get('/orders/{order}/confirmed','OrdersController@ConfirmedAt')->name('confirmed');
+Route::get('/orders/{order}/pickedup','OrdersController@PickedUpAt')->name('pickedup');
+Route::get('/orders/{order}/delivered','OrdersController@DeliveredAt')->name('delivered');
+
+Route::get('/myorders','OrdersController@MyOrders')->name('myorders');
 Route::resource('orders', 'OrdersController');

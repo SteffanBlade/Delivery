@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
 
             // pick up location details
             $table->string('PickupLocation');  // add to register
-            $table->time('PickupTime');
+            $table->time('pickedUpAt');
 
 
 
@@ -28,9 +28,9 @@ class CreateOrdersTable extends Migration
             $table->integer('DeliveryPostCode');
             $table->string('ClientName');
             $table->string('ClientPhoneNumber');
-            $table->string('Gift')->nullable();
+            $table->boolean('Gift')->nullable();
             $table->string('GiftGiver')->nullable();
-            $table->time('DeliveryTime')->nullable();
+            $table->time('deliveredAt')->nullable();
 
             $table->timestamps();
 
