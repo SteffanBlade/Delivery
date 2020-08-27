@@ -31,6 +31,34 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                        @if (auth()->guest())
+          Guest
+@else
+@if ($user->type =='administrator')
+<a class="ml-3" href="/orders">Orders</a>
+<a class="ml-3" href="/myorders">My orders</a>
+<a class="ml-3" href="/orders/create">Create order</a>
+@endif
+@if ($user->type == 'delivery')
+<a class="ml-3" href="/myorders">My orders</a>
+@endif
+@if ($user->type == 'shop')
+<a class="ml-3" href="/myorders">My orders</a>
+<a class="ml-3" href="/orders/create">Create order</a>
+@endif
+@endif
+                        {{-- @auth
+                        
+        @endauth --}}
+                        
+                        
+                        
+                        
+                    </ul>
+                   
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

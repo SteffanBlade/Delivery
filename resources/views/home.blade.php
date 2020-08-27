@@ -1,5 +1,5 @@
 {{-- Extent App --}}
-@extends('layouts.app')
+@extends('layouts.app2')
 
 
 {{-- Content section --}}

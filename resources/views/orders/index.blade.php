@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('content')
     <h2>All orders</h2>
     @if ( count($orders) > 0 )
@@ -45,7 +45,20 @@
                 <a name="PickOrder" id="PickOrder" class="btn btn-secondary" href="/orders/{{ $order->id }}/pickedup" role="button">Pick Order</a>
                 <a name="AcceptOrder" id="AcceptOrder" class="btn btn-success" href="/orders/{{ $order->id }}/delivered" role="button">Delivered</a>
                 @if ($user->type == 'administrator')
-                <a name="SendTo" id="SendTo" class="btn btn-success" href="/orders/{{ $order->id }}/assigned" role="button">Send to </a>
+
+                <form>
+                   <div class="form-group">
+                <label for="exampleFormControlSelect2">Pass to :</label>
+                 <select multiple class="form-control" id="exampleFormControlSelect2">
+                     @foreach ($deliveryMen as $man)
+                     <option>{{ $man->name }}</option>
+                     @endforeach
+                
+                 </select>
+                 </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+        
                 @endif
                 
             

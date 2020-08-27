@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('content')
     <h1>
         Create new order
@@ -33,12 +33,12 @@
     </div>
     {{-- it is a gift? --}}
     <div class="form-group">
-        {{ Form::Label('Gift','It is a gift? ') }}
+        {{ Form::Label('Gift','It is a gift? (Optional)') }}
         {{ Form::checkbox('Gift','1',['class'=>'form-control']) }}
     </div>
     {{-- from who is the gift? --}}
     <div class="form-group">
-        {{ Form::Label('GiftFrom','GiftFrom') }}
+        {{ Form::Label('GiftFrom','GiftFrom (Optional)') }}
         {{ Form::text('GiftFrom','',['class'=>'form-control']) }}
     </div>
     {{ Form::submit('Submit',['class'=>'btn btn-success']) }}

@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +33,13 @@ class OrdersController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $orders = Order::all();
-        return view('orders.index')->with('orders',$orders)->with('user',$user);
+
+        $deliveryMen = User::where('type','like', '%delivery%')->get();
+
+        return view('orders.index')
+        ->with('orders',$orders)
+        ->with('user',$user)
+        ->with('deliveryMen',$deliveryMen);
     }
 
     /**
@@ -85,7 +103,9 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('orders.create')->with('user',$user);
     }
 
     /**

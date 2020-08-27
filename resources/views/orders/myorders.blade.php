@@ -1,5 +1,5 @@
 
-        @extends('layouts.app')
+        @extends('layouts.app2')
 @section('content')
     <h2>All orders</h2>
     @if ( count($orders) > 0 )
