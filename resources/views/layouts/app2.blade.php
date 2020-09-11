@@ -49,9 +49,7 @@
 <a class="ml-3" href="/orders/create">Create order</a>
 @endif
 @endif
-                        {{-- @auth
-                        
-        @endauth --}}
+          
                         
                         
                         

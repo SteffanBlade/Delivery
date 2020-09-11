@@ -27,24 +27,70 @@
                     <ul>
                         {{-- delete this if(only the if not the content of if) when it is readey for production --}}
                         @if ($order->created_at != null)
+
+                        {{-- details for shop users --}}
+                        @if ($user->type == 'shop')
+                             {{--  --}}
+                        @endif
+
+
+                        {{-- details for administrator --}}
+                        @if ($user->type == 'administrator')
                         <li>Created day : {{ $order->created_at->format('d M') }}</li>
                         <li>Created hour : {{ $order->created_at->format('H:m:s') }}</li>
-                        @endif
                         <li>Confirmed hour : {{ $order->confirmedAt }}</li>
                         <li>Picked up hour : {{ $order->pickedUpAt }}</li>
                         <li>Delivered hour : {{ $order->deliveredAt }}</li>
                         @if ($order->Gift == 1)
                          <li>It is a gift from {{ $order->GiftFrom }}</li>
                          @endif
+                        @endif
+
+                        {{-- details for delivery --}}
+                        @if ($user->type == 'delivery')
+                        <li>Created day : {{ $order->created_at->format('d M') }}</li>
+                        <li>Created hour : {{ $order->created_at->format('H:m:s') }}</li>
+                        <li>Confirmed hour : {{ $order->confirmedAt }}</li>
+                        <li>Picked up hour : {{ $order->pickedUpAt }}</li>
+                        <li>Delivered hour : {{ $order->deliveredAt }}</li>
+                        @if ($order->Gift == 1)
+                         <li>It is a gift from {{ $order->GiftFrom }}</li>
+                         @endif
+                        @endif
+                        @endif
+                        
+                        
+                         
+
+                        {{-- <li>Created day : {{ $order->created_at->format('d M') }}</li>
+                        <li>Created hour : {{ $order->created_at->format('H:m:s') }}</li>
+                        @endif
+                        <li>Confirmed hour : {{ $order->confirmedAt }}</li>
+                        <li>Picked up hour : {{ $order->pickedUpAt }}</li>
+                        <li>Delivered hour : {{ $order->deliveredAt }}</li>
+                        @if ($order->Gift == 1)
+                         <li>It is a gift from {{ $order->GiftFrom }}</li> --}}
+                         {{-- @endif --}}
                     </ul>
                 </div>
             </div>
             {{-- order details --}}
             
-            
+            @if ($user->type == 'administrator')
+            <a name="AcceptOrder" id="AcceptOrder" class="btn btn-success" href="/orders/{{ $order->id }}/delivered" role="button">Delivered</a>
+            @endif
+            @if ($user->type == 'delivery')
             <a name="AcceptOrder" id="AcceptOrder" class="btn btn-primary" href="/orders/{{ $order->id }}/confirmed" role="button">Accept Order</a>
             <a name="PickOrder" id="PickOrder" class="btn btn-secondary" href="/orders/{{ $order->id }}/pickedup" role="button">Pick Order</a>
             <a name="AcceptOrder" id="AcceptOrder" class="btn btn-success" href="/orders/{{ $order->id }}/delivered" role="button">Delivered</a>
+            @endif
+            @if ($user->type == 'shop')
+            {{--  --}}
+            @endif
+
+
+            
+            
           
         </div>
         @endforeach

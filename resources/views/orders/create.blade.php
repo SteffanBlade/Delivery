@@ -41,6 +41,11 @@
         {{ Form::Label('GiftFrom','GiftFrom (Optional)') }}
         {{ Form::text('GiftFrom','',['class'=>'form-control']) }}
     </div>
+    {{-- aditional comments  --}}
+<div class="form-group">
+    {{ Form::Label('comment','Aditional comment') }}
+    {{ Form::text('comment','',['class'=>'form-control']) }}
+</div>
     {{ Form::submit('Submit',['class'=>'btn btn-success']) }}
     </div>
     

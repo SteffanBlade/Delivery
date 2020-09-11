@@ -127,7 +127,15 @@ class OrdersController extends Controller
         $order->DeliveryPostCode = $request->input('DeliveryPostCode');
         $order->ClientName = $request->input('ClientName');
         $order->ClientPhoneNumber = $request->input('ClientPhoneNumber');
+        $order->comment = $request->input('comment');
         $order->user_id = auth()->user()->id;
+
+        // checking if the user is of type shop
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        if($user->type == 'shop'){
+            $order->assigned = 1;
+        }
         
         if($request->input('Gift') != null){
             $order->gift = true;
@@ -136,7 +144,7 @@ class OrdersController extends Controller
     
         $order->save();
 
-         return redirect('/orders');
+         return redirect('/myorders');
 
         // to be continued
 
