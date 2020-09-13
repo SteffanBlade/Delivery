@@ -16,21 +16,26 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
 
             $table->id();
+            $table->integer('user_id');
+
 
             // pick up location details
             $table->string('PickupLocation');  // add to register
-            $table->time('pickedUpAt');
-
-
-
+            
             // delivery location details
             $table->string('DeliveryAdress');
             $table->integer('DeliveryPostCode');
             $table->string('ClientName');
             $table->string('ClientPhoneNumber');
             $table->boolean('Gift')->nullable();
-            $table->string('GiftGiver')->nullable();
+            $table->string('GiftFrom')->nullable();
+            
+            $table->time('confirmedAt')->nullable();
+            $table->time('pickedUpAt')->nullable();
             $table->time('deliveredAt')->nullable();
+            
+            $table->string('comment')->nullable();
+            $table->integer('assigned')->nullable();
 
             $table->timestamps();
 

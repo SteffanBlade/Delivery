@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 @section('content')
     <h2>All orders</h2>
-    @if ( count($orders) > 0 )
+    @if (count($orders) > 0)
         @foreach ($orders as $order)
             <div class="jumbotron">
                 <div class="row">
@@ -24,47 +24,75 @@
                     </div>
                     <div class="col-6">
                         <ul>
-                            {{-- delete this if(only the if not the content of if) when it is readey for production --}}
+                            {{-- delete this if(only the if not the content of if) when it is
+                            readey for production --}}
                             @if ($order->created_at != null)
-                            <li>Created day : {{ $order->created_at->format('d M') }}</li>
-                            <li>Created hour : {{ $order->created_at->format('H:m:s') }}</li>
+                                <li>Created day : {{ $order->created_at->format('d M') }}</li>
+                                <li>Created hour : {{ $order->created_at->format('H:m:s') }}</li>
                             @endif
                             <li>Confirmed hour : {{ $order->confirmedAt }}</li>
                             <li>Picked up hour : {{ $order->pickedUpAt }}</li>
                             <li>Delivered hour : {{ $order->deliveredAt }}</li>
+                            <li>Assigned To : {{ $order->assigned }}</li>
                             @if ($order->Gift == 1)
-                             <li>It is a gift from {{ $order->GiftFrom }}</li>
-                             @endif
+                                <li>It is a gift from {{ $order->GiftFrom }}</li>
+                            @endif
                         </ul>
                     </div>
                 </div>
                 {{-- order details --}}
-                
-                
-                <a name="AcceptOrder" id="AcceptOrder" class="btn btn-primary" href="/orders/{{ $order->id }}/confirmed" role="button">Accept Order</a>
-                <a name="PickOrder" id="PickOrder" class="btn btn-secondary" href="/orders/{{ $order->id }}/pickedup" role="button">Pick Order</a>
-                <a name="AcceptOrder" id="AcceptOrder" class="btn btn-success" href="/orders/{{ $order->id }}/delivered" role="button">Delivered</a>
+
+
+                <a name="AcceptOrder" id="AcceptOrder" class="btn btn-success" href="/orders/{{ $order->id }}/delivered"
+                    role="button">Delivered</a>
                 @if ($user->type == 'administrator')
 
-                <form>
-                   <div class="form-group">
-                <label for="exampleFormControlSelect2">Pass to :</label>
-                 <select multiple class="form-control" id="exampleFormControlSelect2">
-                     @foreach ($deliveryMen as $man)
-                     <option>{{ $man->name }}</option>
-                     @endforeach
-                
-                 </select>
-                 </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-        
+                    <!-- {{-- select delivery man  --}} -->
+                    <form>
+                        <div class="form-group mt-2">
+                            <label for="selectDeliveryMan">Pass to :</label>
+                           
+                                @foreach ($deliveryMen as $man)
+                        <a class="btn btn-secondary" href="/orders/{{ $order->id }}/assigned/{{ $man->id }}"> Number {{ $man->id }} - {{ $man->name }}</a>
+                                @endforeach
+                           
+
+                        </div>
+                       
+                    </form>
+
+
                 @endif
-                
-            
+
+
             </div>
         @endforeach
     @else
         <h1>No orders found!</h1>
     @endif
+
+
 @endsection
+
+{{-- ajax script for selected option
+@section('page-js-script')
+<script>
+    $('#selectDeliveryMan').click(function() {
+        var id = $(this).find(':selected')[0].id;
+        console.log('Salutare');
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '../include/continent.php',
+        //     data: {
+        //         'id': id
+        //     },
+        //     success: function (data) {
+        //         // the next thing you want to do 
+        //         var $country = $('#country');
+    });
+
+</script>
+@stop --}}
+
+
+

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -27,19 +27,17 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        // $user_id = auth()->user()->id;
-        // $user = User::find($user_id);
-        // $orders = $user->orders()->get(); 
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $orders = Order::all();
+        $orders = Order::orderBy('created_at', 'DESC')->get();
 
-        $deliveryMen = User::where('type','like', '%delivery%')->get();
+
+        $deliveryMen = User::where('type', 'like', '%delivery%')->get();
 
         return view('orders.index')
-        ->with('orders',$orders)
-        ->with('user',$user)
-        ->with('deliveryMen',$deliveryMen);
+            ->with('orders', $orders)
+            ->with('user', $user)
+            ->with('deliveryMen', $deliveryMen);
     }
 
     /**
@@ -51,9 +49,12 @@ class OrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $orders = $user->orders()->get(); 
-        return view('orders.myorders')->with('orders',$orders)
-                                    ->with('user',$user);
+        $orders = $user->orders()->get();
+        $assignedOrders = DB::table('orders')->where('assigned', $user_id)->get();
+        return view('orders.myorders')
+            ->with('orders', $orders)
+            ->with('myOrders', $assignedOrders)
+            ->with('user', $user);
     }
 
 
@@ -80,7 +81,7 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $order->pickedUpAt = now();
         $order->save();
-         return back();
+        return back();
     }
 
     /**
@@ -96,6 +97,21 @@ class OrdersController extends Controller
         return back();
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Assigned($orderId, $manId)
+    {
+        $order = Order::find($orderId);
+        // $man = User::find($manId);
+        $order->assigned = $manId;
+        $order->save();
+        return back();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -105,7 +121,7 @@ class OrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('orders.create')->with('user',$user);
+        return view('orders.create')->with('user', $user);
     }
 
     /**
@@ -116,8 +132,8 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'PickupLocation'=>'required'
+        $this->validate($request, [
+            'PickupLocation' => 'required'
         ]);
 
         $order = new Order;
@@ -133,20 +149,22 @@ class OrdersController extends Controller
         // checking if the user is of type shop
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        if($user->type == 'shop'){
+        if ($user->type == 'shop') {
             $order->assigned = 1;
         }
-        
-        if($request->input('Gift') != null){
+
+        if ($request->input('Gift') != null) {
             $order->gift = true;
             $order->giftFrom = $request->input('GiftFrom');
         }
-    
+
         $order->save();
 
-         return redirect('/myorders');
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('orders.create')->with('user', $user);
 
-        // to be continued
+        //! to be continued
 
     }
 

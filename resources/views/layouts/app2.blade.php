@@ -11,6 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,8 +41,7 @@
           Guest
 @else
 @if ($user->type =='administrator')
-<a class="ml-3" href="/orders">Orders</a>
-<a class="ml-3" href="/myorders">My orders</a>
+<a class="ml-3" href="/orders">All Orders</a>
 <a class="ml-3" href="/orders/create">Create order</a>
 @endif
 @if ($user->type == 'delivery')
